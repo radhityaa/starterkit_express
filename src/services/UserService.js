@@ -19,17 +19,7 @@ const register = async (request) => {
 
     user.password = await bcrypt.hash(user.password, 12)
 
-    try {
-        const savedUser = await User.create(user)
-        return {
-            status: true,
-            message: 'Successfully Registered',
-            data: savedUser
-        }
-    } catch (err) {
-        console.log("ERROR", err);
-        throw new ResponseError(500, 'Internal Server Error')
-    }
+    return User.create(user)
 }
 
 export default {
